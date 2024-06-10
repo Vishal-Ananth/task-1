@@ -15,14 +15,16 @@
  */
 
 
-const counter = function noOfClicks(){
-
+function counter(callback){
     let count=1;
     return function increment(){
         console.log(`Clicked ${count} times`);
-        return count++;
+        setTimeout(()=>{
+            callback(count-1);
+        },3000)
+        count++;
     };
-}();
+};
 
 const factorialButton = document.getElementById("btn-1");
 const fibonacciButton = document.getElementById("btn-2");
@@ -30,61 +32,57 @@ const summationButton = document.getElementById("btn-3");
 const exponentButton = document.getElementById("btn-4");
 const randomButton = document.getElementById("btn-5");
 
-factorialButton.onclick = () =>{factorial(counter)};
-fibonacciButton.onclick = () => {fibonacci(0,1,counter)};
-summationButton.onclick = () =>{summation(counter)};
-exponentButton.onclick = () => {exponent(counter)};
-randomButton.onclick = () => {randomGen(counter)};
+factorialButton.onclick = counter(factorial);
+fibonacciButton.onclick = counter(fibonacci);
+summationButton.onclick = counter(summation);
+exponentButton.onclick = counter(exponent);
+randomButton.onclick = counter(randomGen);
 
-function factorial(callback){
-    const count = callback();
-    setTimeout(function(){
-            let fact=1;
-            for(let i=count; i>1; i--){
-                fact*=i;
-            }
-            console.log(fact);
-            return fact;  
-        },3000
-    );
+// console.log(factorialButton);
+
+function printOnce(val){
+    let hasBeenExecuted = false;
+    return function(){
+        if(hasBeenExecuted==false){
+            hasBeenExecuted=true;
+            console.log(val);
+        }
+    }
 }
 
-function fibonacci(first,second,callback){
-    // let count=callback();
-    // setTimeout(
-    //     ()=>{
-    //         if()
-    //     },3000
-    // )
+function factorial(count){
+
+    let fact=1;
+    for(let i=1; i<=count; i++){
+        fact*=i;
+    }
+    console.log(fact);
 }
 
-function summation(callback){
-    const count = callback();
-    setTimeout(
-        ()=>{console.log((count*(count+1))/2);},3000
-    )
+function fibonacci(count){
+    let [first,second] = [0,1];
+    let arr = [];
+    // console.log(first);
+    // console.log(second);
+    while(count>0){
+        arr.push(first+second);
+        [first,second] = [second,(first+second)];
+        count--;
+    }
+    console.log(arr.pop());
+}
+
+function summation(count){
+    const res = ((count*(count+1))/2);
+    console.log(res);
+
+    // console.log((count*(count+1))/2)
 };
 
-function exponent(callback){
-    const count = callback();
-    setTimeout(
-        ()=>{console.log(2**count);},3000
-    )
-    
+function exponent(count){
+    console.log(2**count);
 }
 
-function randomGen(callback){
-    const count = callback();
-    setTimeout(
-        ()=>{
-            console.log(Math.floor(Math.random() * count)); 
-        },3000
-    )
+function randomGen(count){
+    console.log(Math.floor(Math.random() * count));
 }
-
-// factorial(5);
-// fibonacci(15,0,1,true);
-// console.log(summation(10));
-// randomGen(10);
-
-
