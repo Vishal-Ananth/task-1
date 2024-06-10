@@ -17,10 +17,14 @@
 
 function counter(callback){
     let count=1;
+    let hasBeenExecuted = false;
     return function increment(){
         console.log(`Clicked ${count} times`);
         setTimeout(()=>{
-            callback(count-1);
+            if(!hasBeenExecuted){
+                callback(count-1);
+                hasBeenExecuted=true;
+            }
         },3000)
         count++;
     };
@@ -40,15 +44,6 @@ randomButton.onclick = counter(randomGen);
 
 // console.log(factorialButton);
 
-function printOnce(val){
-    let hasBeenExecuted = false;
-    return function(){
-        if(hasBeenExecuted==false){
-            hasBeenExecuted=true;
-            console.log(val);
-        }
-    }
-}
 
 function factorial(count){
 
@@ -62,21 +57,21 @@ function factorial(count){
 function fibonacci(count){
     let [first,second] = [0,1];
     let arr = [];
-    // console.log(first);
-    // console.log(second);
+    console.log(first);
+    console.log(second);
     while(count>0){
-        arr.push(first+second);
+        // arr.push(first+second);
+        console.log(first+second);
         [first,second] = [second,(first+second)];
         count--;
     }
-    console.log(arr.pop());
+    // console.log(arr.pop());
 }
 
 function summation(count){
     const res = ((count*(count+1))/2);
     console.log(res);
 
-    // console.log((count*(count+1))/2)
 };
 
 function exponent(count){
