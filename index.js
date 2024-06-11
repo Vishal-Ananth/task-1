@@ -39,12 +39,6 @@ function counter(callback,operation){
         if(timeout) {
             clearTimeout(timeout);
         }
-        // console.log(`Clicked ${count} times`);
-
-        
-        // const cardContainer = document.createElement("div");
-        // cardContainer.setAttribute("class","contaier")
-        // card.appendChild(cardContainer);
 
         const logValue = document.createElement("div");
         logValue.setAttribute("class","log")
@@ -52,17 +46,13 @@ function counter(callback,operation){
         logContainer.appendChild(logValue);
 
         timeout = setTimeout(()=>{
-            // console.log(callback(count-1));
+            
             const result = document.createElement("div");
             result.setAttribute("class","result")
             result.textContent = `${operation} Result : ${callback(count-1)}`
             cardWrapper.appendChild(result);
             count=1;
         },1500);
-
-        
-
-
 
         count++;
     };
@@ -79,9 +69,6 @@ fibonacciButton.onclick = counter(fibonacci,"Fibonacci");
 summationButton.onclick = counter(summation,"Summation");
 exponentButton.onclick = counter(exponent,"Exponent");
 randomButton.onclick = counter(randomGen,"Random");
-
-// console.log(factorialButton);
-
 
 function factorial(count){
     return (count==1) ? 1 : (count*factorial(count-1));
@@ -108,6 +95,3 @@ function randomGen(count){
     const result = Math.floor(Math.random() * count);
     return result;
 }
-
-// createBlock("first");
-// createBlock("second");
