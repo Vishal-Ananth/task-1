@@ -13,24 +13,26 @@
  * functions should execute only after all clicks are completed
  * no of clicks after every click must be logged to the console
  */
-
+const clearConsole = document.getElementById("clear");
+clearConsole.onclick = ()=>{console.clear()};
 
 function counter(callback,reset){
-    var count=1;
-    let hasBeenExecuted = false;
+    let count;
+    let timeout=null;
+
     if(reset==true){
-        count=0;
+        count=1;
         reset=false;
     }
-    return function increment(){
-        
 
+    return function increment(){
+        if(timeout) {
+            clearTimeout(timeout);
+        }
+        
         console.log(`Clicked ${count} times`);
-        let timmer = setTimeout(()=>{
-            // if(!hasBeenExecuted){
-                callback(count-1);
-                // hasBeenExecuted=true;
-            // }
+        timeout = setTimeout(()=>{
+            callback(count-1);
             count=1;
         },3000)
         count++;
@@ -53,38 +55,44 @@ randomButton.onclick = counter(randomGen,true);
 
 
 function factorial(count){
-
+    
     let fact=1;
     for(let i=1; i<=count; i++){
         fact*=i;
     }
     console.log(fact);
+        
 }
 
 function fibonacci(count){
+
     let [first,second] = [0,1];
-    // let arr = [];
-    console.log(first);
-    console.log(second);
+
+    // console.log(first);
+    // console.log(second);
     while(count>0){
-        // arr.push(first+second);
+        
         console.log(first+second);
         [first,second] = [second,(first+second)];
         count--;
     }
-    // console.log(arr.pop());
+     
 }
 
 function summation(count){
+    
     const res = ((count*(count+1))/2);
     console.log(res);
 
 };
 
 function exponent(count){
-    console.log(2**count);
+    const result = 2**count;
+    console.log(result);
+        
 }
 
 function randomGen(count){
-    console.log(Math.floor(Math.random() * count));
+    const result = Math.floor(Math.random() * count);
+    console.log(result);
 }
