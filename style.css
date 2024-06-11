@@ -29,16 +29,22 @@ button{
 .card:hover{
     background: hsl(0, 0%, 90%);
 }
+.log:hover{
+    background: hsl(0, 0%, 100%);
+}
+.result:hover{
+    background: hsl(0, 0%, 100%);
+}
 
 .card-wrapper{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 60% 40%;
     
 }
 
 .log-container{
-    margin:0;
-    width: 40%;
+    
+    width: 100%;
     left:0;
     
 }
@@ -48,12 +54,15 @@ button{
     margin : 2px;
     display: flex;
     justify-content: center;
+    border-radius: 5px;
 }
 
 .result{
     border: solid black 1px;
-    width: 50%;
+    border-radius: 5px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
