@@ -15,16 +15,23 @@
  */
 
 
-function counter(callback){
-    let count=1;
+function counter(callback,reset){
+    var count=1;
     let hasBeenExecuted = false;
+    if(reset==true){
+        count=0;
+        reset=false;
+    }
     return function increment(){
+        
+
         console.log(`Clicked ${count} times`);
-        setTimeout(()=>{
-            if(!hasBeenExecuted){
+        let timmer = setTimeout(()=>{
+            // if(!hasBeenExecuted){
                 callback(count-1);
-                hasBeenExecuted=true;
-            }
+                // hasBeenExecuted=true;
+            // }
+            count=1;
         },3000)
         count++;
     };
@@ -36,11 +43,11 @@ const summationButton = document.getElementById("btn-3");
 const exponentButton = document.getElementById("btn-4");
 const randomButton = document.getElementById("btn-5");
 
-factorialButton.onclick = counter(factorial);
-fibonacciButton.onclick = counter(fibonacci);
-summationButton.onclick = counter(summation);
-exponentButton.onclick = counter(exponent);
-randomButton.onclick = counter(randomGen);
+factorialButton.onclick = counter(factorial,true);
+fibonacciButton.onclick = counter(fibonacci,true);
+summationButton.onclick = counter(summation,true);
+exponentButton.onclick = counter(exponent,true);
+randomButton.onclick = counter(randomGen,true);
 
 // console.log(factorialButton);
 
@@ -56,7 +63,7 @@ function factorial(count){
 
 function fibonacci(count){
     let [first,second] = [0,1];
-    let arr = [];
+    // let arr = [];
     console.log(first);
     console.log(second);
     while(count>0){
