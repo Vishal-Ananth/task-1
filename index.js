@@ -14,28 +14,53 @@
  * no of clicks after every click must be logged to the console
  */
 
-const clearConsole = document.getElementById("clear");
-clearConsole.onclick = ()=>{console.clear()};
-
-function counter(callback){
+function counter(callback,operation){
     let count=1;
     let timeout=null;
-
-    // if(reset==true){
-    //     count=1;
-    //     reset=false;
-    // }
-
+    const body = document.body;
+    let card ;
+    let cardWrapper ;
+    let logContainer;
     return function increment(){
+        if(count==1){
+            card = document.createElement("div");
+            card.setAttribute("class","card");
+            body.appendChild(card);
+
+            cardWrapper = document.createElement("div");
+            cardWrapper.setAttribute("class","card-wrapper")
+            card.appendChild(cardWrapper)
+
+            logContainer = document.createElement("div");
+            logContainer.setAttribute("class","log-container");
+            cardWrapper.appendChild(logContainer);
+        }
+
         if(timeout) {
             clearTimeout(timeout);
         }
+        // console.log(`Clicked ${count} times`);
+
         
-        console.log(`Clicked ${count} times`);
+        // const cardContainer = document.createElement("div");
+        // cardContainer.setAttribute("class","contaier")
+        // card.appendChild(cardContainer);
+
+        const logValue = document.createElement("div");
+        logValue.setAttribute("class","log")
+        logValue.textContent = `Clicked ${count} times`;
+        logContainer.appendChild(logValue);
+
         timeout = setTimeout(()=>{
-            console.log(callback(count-1));
+            // console.log(callback(count-1));
+            const result = document.createElement("div");
+            result.setAttribute("class","result")
+            result.textContent = `${operation} Result : ${callback(count-1)}`
+            cardWrapper.appendChild(result);
             count=1;
-        },3000)
+        },1500);
+
+        
 
         count++;
     };
@@ -47,11 +72,11 @@ const summationButton = document.getElementById("btn-3");
 const exponentButton = document.getElementById("btn-4");
 const randomButton = document.getElementById("btn-5");
 
-factorialButton.onclick = counter(factorial);
-fibonacciButton.onclick = counter(fibonacci,true);
-summationButton.onclick = counter(summation,true);
-exponentButton.onclick = counter(exponent,true);
-randomButton.onclick = counter(randomGen,true);
+factorialButton.onclick = counter(factorial,"Factorial");
+fibonacciButton.onclick = counter(fibonacci,"Fibonacci");
+summationButton.onclick = counter(summation,"Summation");
+exponentButton.onclick = counter(exponent,"Exponent");
+randomButton.onclick = counter(randomGen,"Random");
 
 // console.log(factorialButton);
 
@@ -66,18 +91,21 @@ function fibonacci(count){
 
 function summation(count){
     
-    const res = ((count*(count+1))/2);
-    console.log(res);
+    const result = ((count*(count+1))/2);
+    return result;
 
 };
 
 function exponent(count){
     const result = 2**count;
-    console.log(result);
+    return result;
         
 }
 
 function randomGen(count){
     const result = Math.floor(Math.random() * count);
-    console.log(result);
+    return result;
 }
+
+// createBlock("first");
+// createBlock("second");

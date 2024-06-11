@@ -1,0 +1,59 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+button{
+    margin: 5px;
+}
+
+.button-container{
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.card{
+    display: block;
+    border : solid black 1px;
+    border-radius: 5px;
+    width: 500px;
+    padding: 10px;
+    margin: 10px;
+    background: #fff;
+}
+.card:hover{
+    background: hsl(0, 0%, 90%);
+}
+
+.card-wrapper{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.log-container{
+    margin:0;
+    width: 40%;
+    left:0;
+    
+}
+
+.log{
+    border: solid black 1px;
+    margin : 2px;
+    display: flex;
+    justify-content: center;
+}
+
+.result{
+    border: solid black 1px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
