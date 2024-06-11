@@ -35,7 +35,7 @@ function counter(callback,operation){
             logContainer.setAttribute("class","log-container");
             cardWrapper.appendChild(logContainer);
         }
-
+      
         if(timeout) {
             clearTimeout(timeout);
         }
@@ -61,6 +61,8 @@ function counter(callback,operation){
         },1500);
 
         
+
+
 
         count++;
     };
