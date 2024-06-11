@@ -21,11 +21,6 @@ function counter(callback){
     let count=1;
     let timeout=null;
 
-    // if(reset==true){
-    //     count=1;
-    //     reset=false;
-    // }
-
     return function increment(){
         if(timeout) {
             clearTimeout(timeout);
@@ -36,6 +31,8 @@ function counter(callback){
             console.log(callback(count-1));
             count=1;
         },3000)
+
+
 
         count++;
     };
@@ -48,10 +45,10 @@ const exponentButton = document.getElementById("btn-4");
 const randomButton = document.getElementById("btn-5");
 
 factorialButton.onclick = counter(factorial);
-fibonacciButton.onclick = counter(fibonacci,true);
-summationButton.onclick = counter(summation,true);
-exponentButton.onclick = counter(exponent,true);
-randomButton.onclick = counter(randomGen,true);
+fibonacciButton.onclick = counter(fibonacci);
+summationButton.onclick = counter(summation);
+exponentButton.onclick = counter(exponent);
+randomButton.onclick = counter(randomGen);
 
 // console.log(factorialButton);
 
