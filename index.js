@@ -13,17 +13,18 @@
  * functions should execute only after all clicks are completed
  * no of clicks after every click must be logged to the console
  */
+
 const clearConsole = document.getElementById("clear");
 clearConsole.onclick = ()=>{console.clear()};
 
-function counter(callback,reset){
-    let count;
+function counter(callback){
+    let count=1;
     let timeout=null;
 
-    if(reset==true){
-        count=1;
-        reset=false;
-    }
+    // if(reset==true){
+    //     count=1;
+    //     reset=false;
+    // }
 
     return function increment(){
         if(timeout) {
@@ -32,9 +33,10 @@ function counter(callback,reset){
         
         console.log(`Clicked ${count} times`);
         timeout = setTimeout(()=>{
-            callback(count-1);
+            console.log(callback(count-1));
             count=1;
         },3000)
+
         count++;
     };
 };
@@ -45,7 +47,7 @@ const summationButton = document.getElementById("btn-3");
 const exponentButton = document.getElementById("btn-4");
 const randomButton = document.getElementById("btn-5");
 
-factorialButton.onclick = counter(factorial,true);
+factorialButton.onclick = counter(factorial);
 fibonacciButton.onclick = counter(fibonacci,true);
 summationButton.onclick = counter(summation,true);
 exponentButton.onclick = counter(exponent,true);
@@ -55,28 +57,11 @@ randomButton.onclick = counter(randomGen,true);
 
 
 function factorial(count){
-    
-    let fact=1;
-    for(let i=1; i<=count; i++){
-        fact*=i;
-    }
-    console.log(fact);
-        
+    return (count==1) ? 1 : (count*factorial(count-1));
 }
 
 function fibonacci(count){
-
-    let [first,second] = [0,1];
-
-    // console.log(first);
-    // console.log(second);
-    while(count>0){
-        
-        console.log(first+second);
-        [first,second] = [second,(first+second)];
-        count--;
-    }
-     
+    return (count==0 || count==1)? 1 :(fibonacci(count-1)+fibonacci(count-2));     
 }
 
 function summation(count){
