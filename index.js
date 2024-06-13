@@ -17,15 +17,28 @@
 function counter(callback,operation){
     let count=1;
     let timeout=null;
-    const body = document.body;
+    const top = document.getElementById("top");
     let card ;
     let cardWrapper ;
     let logContainer;
+
+
     return function increment(){
         if(count==1){
-            card = document.createElement("div");
-            card.setAttribute("class","card");
-            body.appendChild(card);
+
+            // console.log(top.hasChildNodes());
+            if(top.hasChildNodes()){
+                const olderCard = top.firstChild;
+                card = document.createElement("div");
+                card.setAttribute("class","card");
+                top.insertBefore(card,olderCard);
+            }else{
+                card = document.createElement("div");
+                card.setAttribute("class","card");
+                top.appendChild(card);
+            }
+
+            
 
             cardWrapper = document.createElement("div");
             cardWrapper.setAttribute("class","card-wrapper")
